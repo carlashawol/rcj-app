@@ -11,7 +11,7 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
     backgroundColor: "white",
     color: "black",
     border: "2px solid #ced4da",
-    fontSize: "1.125rem",
+    fontSize: "1rem",
     width: "320px",
     height: "30px",
     paddingLeft: "12px",

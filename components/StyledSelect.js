@@ -7,7 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Stack, Typography } from "@mui/material";
 import { Checkbox } from "@mui/material";
 
-const StyledSelect = ({ title, data }) => {
+const StyledSelect = ({ title, data, size }) => {
   const [filter, setFilter] = React.useState("");
 
   const handleChange = (event) => {
@@ -18,19 +18,20 @@ const StyledSelect = ({ title, data }) => {
   };
 
   return (
-    <Stack>
+    <>
       <Typography
         sx={{
           color: "#42A0CE",
           fontWeight: 700,
           fontSize: "16px",
           marginLeft: "5px",
-          marginBottom: "6px"
+          marginBottom: "8px",
+          marginTop: "-2px"
         }}
       >
         {title}
       </Typography>
-      <FormControl sx={{ width: 220 }}>
+      <FormControl>
         <Select
           displayEmpty
           value={filter}
@@ -38,10 +39,12 @@ const StyledSelect = ({ title, data }) => {
           input={
             <OutlinedInput
               sx={{
-                height: "47px",
-                width: "400px",
+                height: "48px",
+                width: size,
                 border: "1px solid #ced4da",
-                borderRadius: 20,
+                borderRadius: 5,
+                mt: "-2px",
+                bgcolor: "white"
               }}
             />
           }
@@ -67,7 +70,7 @@ const StyledSelect = ({ title, data }) => {
           ))}
         </Select>
       </FormControl>
-    </Stack>
+    </>
   );
 };
 

@@ -15,92 +15,123 @@ export default function FormAddClients() {
     "Contado contra entrega",
     "Crédito 7 días",
     "Crédito 15 días",
-    "Crédito 30 días",
-    "Crédito 45 días",
-    "Crédito 60 días",
-    "Crédito 90 días",
-    "Crédito 180 días",
   ];
 
   return (
     <form>
-      <Stack justifyContent="center" alignItems="center" spacing={4} pt={5}>
-        <Stack direction={"row"} paddingTop={2} spacing={3}>
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="name" label="NOMBRE" />
-            <StyledInput id="name" />
-          </FormControl>
+      <Stack justifyContent="center" pt={5} alignItems="center" pb={5}>
+        <Stack
+          spacing={4}
+          maxWidth={1080}
+        >
+          <Stack direction={"row"} paddingTop={2} spacing={3}>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="name" label="NOMBRE" />
+              <StyledInput id="name" />
+            </FormControl>
+
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="nit" label="NIT" />
+              <StyledInput id="nit" />
+            </FormControl>
+
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="rif" label="RIF" />
+              <StyledInput id="rif" />
+            </FormControl>
+          </Stack>
 
           <FormControl variant="standard">
-            <StyledInputLabel htmlFor="nit" label="NIT" />
-            <StyledInput id="nit" />
+            <StyledInputLabel htmlFor="direction" label="DIRECCIÓN" />
+            <StyledInput
+              id="direction"
+              sx={{ "& .MuiInputBase-input": { width: "1037px" } }}
+            />
           </FormControl>
 
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="rif" label="RIF" />
-            <StyledInput id="rif" />
-          </FormControl>
-        </Stack>
+          <Stack direction={"row"} paddingTop={2} spacing={3}>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="city" label="CIUDAD" />
+              <StyledInput id="city" />
+            </FormControl>
 
-        <FormControl variant="standard">
-          <StyledInputLabel htmlFor="direction" label="DIRECCIÓN" />
-          <StyledInput
-            id="direction"
-            sx={{ "& .MuiInputBase-input": { width: "1030px" } }}
-          />
-        </FormControl>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="state" label="DEPARTAMENTO" />
+              <StyledInput id="state" />
+            </FormControl>
 
-        <Stack direction={"row"} paddingTop={2} spacing={3}>
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="city" label="CIUDAD" />
-            <StyledInput id="city" />
-          </FormControl>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="state" label="PAIS" />
+              <StyledInput id="state" />
+            </FormControl>
+          </Stack>
 
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="state" label="DEPARTAMENTO" />
-            <StyledInput id="state" />
-          </FormControl>
+          <Stack direction={"row"} paddingTop={2} spacing={3}>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="contact" label="PERSONA CONTACTO" />
+              <StyledInput id="contact" />
+            </FormControl>
 
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="state" label="PAIS" />
-            <StyledInput id="state" />
-          </FormControl>
-        </Stack>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="telephone" label="TELÉFONO" />
+              <StyledInput id="telephone" />
+            </FormControl>
 
-        <Stack direction={"row"} paddingTop={2} spacing={3}>
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="contact" label="PERSONA CONTACTO" />
-            <StyledInput id="contact" />
-          </FormControl>
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="cellphone" label="CELULAR" />
+              <StyledInput id="cellphone" />
+            </FormControl>
+          </Stack>
 
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="telephone" label="TELÉFONO" />
-            <StyledInput id="telephone" />
-          </FormControl>
+          <Stack direction={"row"} paddingTop={2} justifyContent="space-between">
+            <FormControl variant="standard">
+              <StyledInputLabel htmlFor="email" label="CORREO ELECTRÓNICO" />
+              <StyledInput
+                id="email"
+                sx={{ "& .MuiInputBase-input": { width: "450px" } }}
+              />
+            </FormControl>
 
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="cellphone" label="CELULAR" />
-            <StyledInput id="cellphone" />
-          </FormControl>
-        </Stack>
+            <FormControl variant="standard">
+              <StyledSelect title="FORMA DE PAGO" data={payment_method} size="500px"/>
+            </FormControl>
+          </Stack>
 
-        <Stack direction={"row"} paddingTop={2} spacing={3}>
-          <FormControl variant="standard">
-            <StyledInputLabel htmlFor="email" label="CORREO ELECTRÓNICO" />
-            <StyledInput id="email" sx={{ "& .MuiInputBase-input": { width: "400px" } }}/>
-          </FormControl>
+          <Stack direction={"row"} alignItems="center" justifyContent="center"  spacing={55}>
+            <FormControl variant="standard">
+              <StyledInputLabel
+                htmlFor="price-ajustment"
+                label="AJUSTAR PRECIOS"
+              />
+              <StyledInput
+                id="price-ajustment"
+                sx={{ "& .MuiInputBase-input": { width: "450px", mr: "5px" } }}
+                endAdornment={
+                  <InputAdornment>
+                    <Typography
+                      fontSize={20}
+                      fontWeight={700}
+                      ml={-6}
+                      mt={1}
+                      zIndex={3}
+                    >
+                      %
+                    </Typography>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
-          <StyledSelect title="FORMA DE PAGO" data={payment_method} />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: "#27749C", borderRadius: 20, fontWeight: 500, px: 4, py: 1.5, mt: "30px !important" }}
+            >
+              Guardar
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
-
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ backgroundColor: "#27749C", borderRadius: 20 }}
-      >
-        Guardar
-      </Button>
     </form>
   );
 }

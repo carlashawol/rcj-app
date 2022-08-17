@@ -3,6 +3,8 @@ import Image from 'next/image'
 import styles from './Layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
+import Logo from '../public/images/logo.png'
+import { Box } from '@mui/material'
 
 const name = 'Carla Daniela'
 export const siteTitle = 'Next.js Sample Website'
@@ -28,7 +30,10 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
+  
+
             <a className={styles.logo} href="/">
+            <Image src={Logo} width={50} height={50}/>
               <span className={styles.logoText}>
                 <span className={styles.logoTitle}>RCJ Services</span>
               </span>
