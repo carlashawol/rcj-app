@@ -9,7 +9,10 @@ export async function middleware(req) {
     !pathname.startsWith("/auth/signin")
   ) {
     const token = await getToken({ req });
-    
+
+    if (!token) {
+      return NextResponse.redirect(`${origin}/auth/signin`);
+    }
   }
 
   return NextResponse.next();
