@@ -4,20 +4,35 @@ import utilStyles from "../styles/utils.module.css";
 import { Typography, Box, Stack } from "@mui/material";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import ServiceOfferForm from "../components/ServiceOfferForm";
-import * as React from "react";
 import dynamic from "next/dynamic";
+import useClients from "./../hooks/useClients";
+import React, { useEffect, useState} from "react";
 
 const GeneratePDF = dynamic(() => import("../components/GeneratePDF"), {
   ssr: false,
 });
 
 export default function addClient() {
-  const [generate, setGenerate] = React.useState(false)
+  const { getClients } = useClients();
+  const [generate, setGenerate] = React.useState(false);
+  const [clients, setClients] = React.useState([]);
 
   const onHandleGenerate = (value) => {
-    setGenerate(value)
-  }
+    setGenerate(value);
+  };
   const ref = React.useRef();
+
+  useEffect(() => {
+    const getClientsResponse = async () => {
+      const apiResponse = await getClients();
+      if (!apiResponse.error && apiResponse.data) {
+        //mostrar popup de que se creo correctamente
+        setClients(apiResponse.data)
+      }
+    };
+    getClientsResponse();
+  }, [getClients, setClients]);
+
   return (
     <Layout home>
       <Head>
@@ -38,16 +53,14 @@ export default function addClient() {
         </Stack>
       </Box>
 
-      <ServiceOfferForm onHandleGenerate={onHandleGenerate}/>
+      <ServiceOfferForm onHandleGenerate={onHandleGenerate} clientsData={clients} />
 
-      <div className="main" style={{visibility: "hidden"}}>
+      <div className="main" style={{ visibility: "hidden" }}>
         <div className="content" ref={ref}>
           <div id="pdf-data">
-            <img src="/images/header.png" width="209" height="25"/>
-           
-            <h1 className="titlee">
-              Hello PDF
-            </h1>
+            <img src="/images/header.png" width="209" height="25" />
+
+            <h1 className="titlee">Hello PDF</h1>
             <p id="text">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
               animi, molestiae quaerat assumenda neque culpa ab aliquam facilis
@@ -101,9 +114,8 @@ export default function addClient() {
             </table> */}
           </div>
         </div>
-        <GeneratePDF html={ref} generate={generate}/>
+        <GeneratePDF html={ref} generate={generate} />
       </div>
-
     </Layout>
   );
 }

@@ -5,12 +5,16 @@ import {
   Button,
   FormControl,
   InputAdornment,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem
 } from "@mui/material";
 import StyledInputLabel from "./StyledInputLabel";
 import StyledInput from "./StyledInput";
 import StyledSelect from "./StyledSelect";
 
-export default function ServiceOfferForm({onHandleGenerate}) {
+export default function ServiceOfferForm({ onHandleGenerate, clientsData }) {
   const payment_method = ["Joan Rendon", "Carla Baliero", "Verónica Baliero"];
 
   return (
@@ -18,12 +22,60 @@ export default function ServiceOfferForm({onHandleGenerate}) {
       <Stack justifyContent="center" pt={5} alignItems="center" pb={5}>
         <Stack spacing={4} maxWidth={1090}>
           <Stack direction={"row"} paddingTop={2} spacing={3}>
-            <FormControl variant="standard">
-              <StyledSelect
-                title="NOMBRE DEL CLIENTE"
-                data={payment_method}
-                size="350px"
-              />
+            <FormControl
+              sx={{
+                marginTop: "8px",
+              }}
+            >
+              <InputLabel
+                shrink={true}
+                id="client_name"
+                sx={{
+                  color: "#42A0CE",
+                  fontWeight: 700,
+                  fontSize: "1.125rem",
+                }}
+              >
+                NOMBRE DEL CLIENTE
+              </InputLabel>
+              <Select
+                id="client_name"
+                labelId="client_name"
+                label="NOMBRE DEL CLIENTE"
+                displayEmpty
+                input={
+                  <OutlinedInput
+                    sx={{
+                      width: 350,
+                      height: 48,
+                      border: "1px solid #ced4da",
+                      borderRadius: 5,
+                      marginTop: 2.5,
+                      bgcolor: "white",
+                    }}
+                  />
+                }
+              >
+                {clientsData.map((data) => (
+                  <MenuItem
+                    key={data}
+                    value={data.name}
+                    sx={{
+                      "&.Mui-selected": {
+                        backgroundColor: "#DDF2F9",
+                        "&:hover": {
+                          backgroundColor: "#DDF2F9",
+                        },
+                      },
+                      "&:hover": {
+                        backgroundColor: "#DDF2F9",
+                      },
+                    }}
+                  >
+                    {data.name}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
 
             <FormControl variant="standard">
@@ -54,7 +106,10 @@ export default function ServiceOfferForm({onHandleGenerate}) {
             </FormControl>
 
             <FormControl variant="standard">
-              <StyledInputLabel htmlFor="email" label="CLAVE VALIDACIÓN DE FIRMA" />
+              <StyledInputLabel
+                htmlFor="email"
+                label="CLAVE VALIDACIÓN DE FIRMA"
+              />
               <StyledInput
                 id="email"
                 sx={{ "& .MuiInputBase-input": { width: "500px" } }}
@@ -98,7 +153,10 @@ export default function ServiceOfferForm({onHandleGenerate}) {
               </FormControl>
 
               <FormControl variant="standard">
-                <StyledInputLabel htmlFor="direction" label="VALIDEZ DE LA OFERTA" />
+                <StyledInputLabel
+                  htmlFor="direction"
+                  label="VALIDEZ DE LA OFERTA"
+                />
                 <StyledInput
                   id="direction"
                   sx={{ "& .MuiInputBase-input": { width: "400px" } }}
@@ -129,7 +187,10 @@ export default function ServiceOfferForm({onHandleGenerate}) {
               </FormControl>
 
               <FormControl variant="standard">
-                <StyledInputLabel htmlFor="direction" label="TIEMPO DE CERTIFICADO" />
+                <StyledInputLabel
+                  htmlFor="direction"
+                  label="TIEMPO DE CERTIFICADO"
+                />
                 <StyledInput
                   id="direction"
                   sx={{ "& .MuiInputBase-input": { width: "400px" } }}
@@ -213,9 +274,8 @@ export default function ServiceOfferForm({onHandleGenerate}) {
 
       <Box display={"flex"} justifyContent="right" mr={40}>
         <Button
-          onClick={()=>{
-            onHandleGenerate(true)
-            console.log("lo hice")
+          onClick={() => {
+            onHandleGenerate(true);
           }}
           variant="contained"
           sx={{

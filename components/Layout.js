@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from './Layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
-import Logo from '../public/images/logo.png'
-import { Box } from '@mui/material'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "./Layout.module.css";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
+import Logo from "../public/images/logo.png";
+import { signOut } from "next-auth/react";
 
-const name = 'Carla Daniela'
-export const siteTitle = 'Next.js Sample Website'
+const name = "Carla Daniela";
+export const siteTitle = "Next.js Sample Website";
 
 export default function Layout({ children, home }) {
   return (
@@ -30,16 +30,21 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
-  
-
             <a className={styles.logo} href="/">
-            <Image src={Logo} width={50} height={50}/>
+              <Image src={Logo} width={50} height={50} />
               <span className={styles.logoText}>
                 <span className={styles.logoTitle}>RCJ Services</span>
               </span>
             </a>
             <nav className={styles.navMenu}>
               <a href="/python/">Actualizar contraseña</a>
+              <button
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Logout
+              </button>
             </nav>
           </>
         ) : (
@@ -73,5 +78,5 @@ export default function Layout({ children, home }) {
         </div>
       )}
     </div>
-  )
+  );
 }

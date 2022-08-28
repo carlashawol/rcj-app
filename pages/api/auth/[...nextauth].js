@@ -1,36 +1,37 @@
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
 
 export default NextAuth({
   providers: [
     CredentialProvider({
       name: "credentials",
-      credentials: {
-        username: {
-          label: "Email",
-          type: "text",
-          placeholder: "johndoe@test.com",
-        },
-        password: { label: "Password", type: "password" },
-      },
-      authorize: (credentials) => {
-        // database look up
-        if (
-          credentials.username === "john" &&
-          credentials.password === "test"
-        ) {
-          return {
-            id: 2,
-            name: "John",
-            email: "johndoe@test.com",
-          };
+      credentials: {},
+      authorize: async (credentials) => {
+        const prisma = new PrismaClient();
+        const users = await prisma.user.findMany();
+        const { username, password } = credentials;
+        let isValid = false;
+        let userData = {}
+
+        users.forEach((user) => {
+          if (username === user.username && password === user.password) {
+            isValid = true;
+            userData = user;
+          }
+        });
+
+        if (isValid) {
+          return userData;
         }
 
-        // login failed
         return null;
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/signin",
+  },
   callbacks: {
     jwt: ({ token, user }) => {
       // first time jwt callback is run, user object is available
