@@ -11,49 +11,69 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   username String @db.VarChar(255)
-  email String @db.VarChar(255)
+  email    String @db.VarChar(255)
   password String @db.VarChar(255)
-  name String @db.VarChar(255)
+  name     String @db.VarChar(255)
 }
 
 model Client {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  nit String @db.VarChar(255)
-  rif String @db.VarChar(255)
-  address String @db.VarChar(255)
-  city String @db.VarChar(255)
-  department String @db.VarChar(255)
-  country String @db.VarChar(255)
-  contact String @db.VarChar(255)
-  telephone String @db.VarChar(255)
-  cellphone String @db.VarChar(255)
-  email String @db.VarChar(255)
-  payment_method String @db.VarChar(255)
+  id               Int          @id @default(autoincrement())
+  name             String       @unique @db.VarChar(255)
+  nit              String       @db.VarChar(255)
+  rif              String       @db.VarChar(255)
+  address          String       @db.VarChar(255)
+  city             String       @db.VarChar(255)
+  department       String       @db.VarChar(255)
+  country          String       @db.VarChar(255)
+  contact          String       @db.VarChar(255)
+  telephone        String       @db.VarChar(255)
+  cellphone        String       @db.VarChar(255)
+  email            String       @db.VarChar(255)
+  payment_method   String       @db.VarChar(255)
   price_adjustment Int
+  Instrument       Instrument[]
 }
 
-
 model Specification {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  brand String @db.VarChar(255)
-  model String @db.VarChar(255)
-  instrument_type String @db.VarChar(255)
-  accuracy_class String @db.VarChar(255)
-  start_range String @db.VarChar(255)
-  end_range String @db.VarChar(255)
-  unity String @db.VarChar(255)
-  resolution String @db.VarChar(255)
-  division_value String @db.VarChar(255)
-  emp String @db.VarChar(255)
-  emp_unity String @db.VarChar(255)
-  temperature_coefficient String @db.VarChar(255)
-  rentability String @db.VarChar(255)
-  linearity String @db.VarChar(255)
-  hysteresis String @db.VarChar(255)
-  sensitivity String @db.VarChar(255)
-  calibration_method String @db.VarChar(255)
+  id                      Int          @id @default(autoincrement())
+  name                    String       @unique @db.VarChar(255)
+  brand                   String       @db.VarChar(255)
+  model                   String       @db.VarChar(255)
+  instrument_type         String       @db.VarChar(255)
+  accuracy_class          String       @db.VarChar(255)
+  start_range             String       @db.VarChar(255)
+  end_range               String       @db.VarChar(255)
+  unity                   String       @db.VarChar(255)
+  resolution              String       @db.VarChar(255)
+  division_value          String       @db.VarChar(255)
+  emp                     String       @db.VarChar(255)
+  emp_unity               String       @db.VarChar(255)
+  temperature_coefficient String       @db.VarChar(255)
+  rentability             String       @db.VarChar(255)
+  linearity               String       @db.VarChar(255)
+  hysteresis              String       @db.VarChar(255)
+  sensitivity             String       @db.VarChar(255)
+  calibration_method      String       @db.VarChar(255)
+  Instrument              Instrument[]
+}
+
+model Instrument {
+  id                     Int           @id @default(autoincrement())
+  image                  Bytes?
+  client_relation        Client        @relation(fields: [client_name], references: [name])
+  client_name            String        @db.VarChar(255)
+  operative_status       String        @db.VarChar(255)
+  metrologic_status      String        @db.VarChar(255)
+  specification_relation Specification @relation(fields: [specification_name], references: [name])
+  specification_name     String        @db.VarChar(255)
+  serial                 String        @db.VarChar(255)
+  inventary              String        @db.VarChar(255)
+  calibration_frecuency  Int
+  internal_code          String        @db.VarChar(255)
+  sensor_type            String        @db.VarChar(255)
+  maintenance_frecuency  Int
+  sensor_serial          String        @db.VarChar(255)
+  sensor_ubication       String        @db.VarChar(255)
 }

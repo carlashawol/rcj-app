@@ -73,7 +73,7 @@ const SuccessConfirmationModal = ({
           <Stack alignItems="center">
             <CheckCircleIcon color="primary" sx={{ fontSize: 72 }} />
             <Typography
-              sx={{ fontSize: 22, color: themeColors.greyDarkText }}
+              sx={{ fontSize: 20, color: themeColors.greyDarkText, textAlign: "center", mb: 2}}
             >
               {modalTitle}
             </Typography>

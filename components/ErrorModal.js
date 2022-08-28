@@ -73,7 +73,7 @@ const ErrorModal = ({
           <Stack alignItems="center">
             <ErrorIcon sx={{ fontSize: 72, color: themeColors.error }} />
             <Typography
-              sx={{ fontSize: "1.35rem", color: themeColors.greyDarkText }}
+              sx={{ fontSize: 22, color: themeColors.greyDarkText }}
             >
               {modalTitle}
             </Typography>
@@ -101,11 +101,12 @@ const ErrorModal = ({
                 padding: "11px 14px",
                 bgcolor: themeColors.error,
                 "&:hover": { bgcolor: themeColors.error },
+                borderRadius: 10,
               }}
             >
               {buttonTitle}
             </Button>
-            <Link href={admin ? "/knowix-admin/dashboard" : "/"} passHref>
+            <Link href="/" passHref>
               <Button
                 variant="outlined"
                 sx={{
@@ -114,9 +115,10 @@ const ErrorModal = ({
                   color: themeColors.error,
                   borderColor: themeColors.error,
                   "&:hover": { borderColor: themeColors.error },
+                  borderRadius: 10,
                 }}
               >
-                Back to Dashboard
+                Página de inicio
               </Button>
             </Link>
           </Stack>

@@ -37,7 +37,7 @@ export default function Layout({ children, home }) {
               </span>
             </a>
             <nav className={styles.navMenu}>
-              <a href="/python/">Actualizar contraseña</a>
+              {/* <a href="/python/">Actualizar contraseña</a> */}
               <button
                 onClick={() => {
                   signOut();

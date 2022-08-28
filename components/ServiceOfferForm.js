@@ -8,7 +8,7 @@ import {
   InputLabel,
   Select,
   OutlinedInput,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import StyledInputLabel from "./StyledInputLabel";
 import StyledInput from "./StyledInput";
@@ -169,7 +169,7 @@ export default function ServiceOfferForm({ onHandleGenerate, clientsData }) {
                         mt={1}
                         zIndex={3}
                       >
-                        Dias
+                        Días
                       </Typography>
                     </InputAdornment>
                   }
@@ -203,7 +203,7 @@ export default function ServiceOfferForm({ onHandleGenerate, clientsData }) {
                         mt={1}
                         zIndex={3}
                       >
-                        Dias
+                        Días
                       </Typography>
                     </InputAdornment>
                   }

@@ -355,8 +355,8 @@ export default function FormAddClients() {
       />
       <ErrorModal
         title="Error"
-        modalTitle="There was an issue creating the user"
-        buttonTitle="See all users"
+        modalTitle="El cliente no fue creada, intente más tarde."
+        buttonTitle="Cerrar"
         admin={false}
         openModal={errorMessage}
         closeModal={handleCloseErrorModal}

@@ -8,21 +8,21 @@ class ApiResponse {
   statusText;
 }
 
-const useSpecification = () => {
+const useInstruments = () => {
   const http = useHttp();
 
-  const createSpecification = useCallback(
+  const createInstrument = useCallback(
     async (info) => {
       const apiResponse = new ApiResponse();
 
       const response = await http().post(
-        "https://rcj-services-app.vercel.app/api/specifications",
+        "https://rcj-services-app.vercel.app/api/instruments",
         info
       );
 
       if (response.error) {
         console.error(
-          `Error creating specification ${response.status} ${response.error}`,
+          `Error creating instrument ${response.status} ${response.error}`,
           response
         );
         apiResponse.status = response.status;
@@ -36,15 +36,13 @@ const useSpecification = () => {
     [http]
   );
 
-  const getSpecifications = useCallback(async () => {
+  const getInstruments = useCallback(async () => {
     const apiResponse = new ApiResponse();
 
-    const response = await http().get(
-      "https://rcj-services-app.vercel.app/api/specifications"
-    );
+    const response = await http().get("https://rcj-services-app.vercel.app/api/instruments");
 
     if (response.error) {
-      console.error(`Error getting specifications ${response.status}`);
+      console.error(`Error getting instrument ${response.status}`);
       apiResponse.status = response.status;
       apiResponse.error = response.error;
       return apiResponse;
@@ -55,9 +53,9 @@ const useSpecification = () => {
   }, [http]);
 
   return {
-    createSpecification,
-    getSpecifications,
+    getInstruments,
+    createInstrument,
   };
 };
 
-export default useSpecification;
+export default useInstruments;
