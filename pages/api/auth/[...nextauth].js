@@ -21,6 +21,8 @@ export default NextAuth({
           }
         });
 
+        prisma.$disconnect();
+
         if (isValid) {
           return userData;
         }
