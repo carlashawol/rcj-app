@@ -16,7 +16,7 @@ const useSpecification = () => {
       const apiResponse = new ApiResponse();
 
       const response = await http().post(
-        "http://localhost:3000/api/specifications",
+        "https://nextjs-blog-carlashawol.vercel.app/api/specifications",
         info
       );
 
@@ -40,7 +40,7 @@ const useSpecification = () => {
     const apiResponse = new ApiResponse();
 
     const response = await http().get(
-      "http://localhost:3000/api/specifications"
+      "https://nextjs-blog-carlashawol.vercel.app/api/specifications"
     );
 
     if (response.error) {

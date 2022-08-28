@@ -16,7 +16,7 @@ const useClients = () => {
       const apiResponse = new ApiResponse();
 
       const response = await http().post(
-        "http://localhost:3000/api/clients",
+        "https://nextjs-blog-carlashawol.vercel.app/api/clients",
         info
       );
 
@@ -39,7 +39,7 @@ const useClients = () => {
   const getClients = useCallback(async () => {
     const apiResponse = new ApiResponse();
 
-    const response = await http().get("http://localhost:3000/api/clients");
+    const response = await http().get("https://nextjs-blog-carlashawol.vercel.app/api/clients");
 
     if (response.error) {
       console.error(`Error getting clients ${response.status}`);
