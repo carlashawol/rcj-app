@@ -145,7 +145,7 @@ export default function ServiceOfferForm({ onHandleGenerate, clientsData }) {
 
             <Stack direction={"row"} justifyContent="space-between" width="85%">
               <FormControl variant="standard">
-                <StyledInputLabel htmlFor="direction" label="GARATÍA" />
+                <StyledInputLabel htmlFor="direction" label="GARANTÍA" />
                 <StyledInput
                   id="direction"
                   sx={{ "& .MuiInputBase-input": { width: "400px" } }}
