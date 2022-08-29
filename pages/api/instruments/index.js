@@ -9,6 +9,7 @@ export default async function (req, res) {
     return res.send(instruments);
   } else if (req.method === "POST") {
     const { body: data } = req;
+    console.log("this is the", data)
     const newInstrument = await prisma.instrument.create({ data });
     console.log(newInstrument)
     prisma.$disconnect();
