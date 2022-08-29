@@ -16,7 +16,7 @@ const useInstruments = () => {
       const apiResponse = new ApiResponse();
 
       const response = await http().post(
-        "https://rcj-services-app.vercel.app/api/instruments",
+        "https://rcj-services.vercel.app/api/instruments",
         info
       );
 
@@ -39,7 +39,7 @@ const useInstruments = () => {
   const getInstruments = useCallback(async () => {
     const apiResponse = new ApiResponse();
 
-    const response = await http().get("https://rcj-services-app.vercel.app/api/instruments");
+    const response = await http().get("https://rcj-services.vercel.app/api/instruments");
 
     if (response.error) {
       console.error(`Error getting instrument ${response.status}`);
