@@ -3,14 +3,16 @@ import { PrismaClient } from "@prisma/client";
 export default async function (req, res) {
   const prisma = new PrismaClient();
   if (req.method === "GET") {
-    const clients = await prisma.client.findMany();
+    const offers = await prisma.offer.findMany();
+    console.log(offers)
     prisma.$disconnect();
-    return res.send(clients);
+    return res.send(offers);
   } else if (req.method === "POST") {
     const { body: data } = req;
-    const newClient = await prisma.client.create({ data });
+    console.log("this is the", data)
+    const newOffer = await prisma.offer.create({ data });
+    console.log(newOffer)
     prisma.$disconnect();
-    return res.status(201).send(newClient);
+    return res.status(201).send(newOffer);
   }
 }
-

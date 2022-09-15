@@ -1,6 +1,5 @@
 import {
   Typography,
-  Box,
   Stack,
   Button,
   FormControl,
@@ -23,6 +22,7 @@ import ErrorModal from "./ErrorModal";
 import React, { useState } from "react";
 
 export default function AddInstrumentForm({ clients, specifications }) {
+  
   const operative_status = ["Operativo", "Fuera de servicio"];
 
   const metrological_status = ["Conforme", "No Conforme"];
@@ -108,7 +108,7 @@ export default function AddInstrumentForm({ clients, specifications }) {
         <Stack>
           <Stack
             justifyContent="center"
-            alignItems="flex-end"
+            alignItems="flex-start"
             spacing={4}
             pt={5}
           >
@@ -118,19 +118,6 @@ export default function AddInstrumentForm({ clients, specifications }) {
               alignItems={"flex-end"}
               spacing={3}
             >
-              <FormControl variant="standard">
-                <StyledInputLabel
-                  htmlFor="image"
-                  label="IMAGEN DEL INSTRUMENTO (OPCIONAL)"
-                />
-                <StyledInput
-                  id="image"
-                  inputProps={{ accept: "image/*" }}
-                  type="file"
-                  sx={{ "& .MuiInputBase-input": { width: "500px" } }}
-                />
-              </FormControl>
-
               <FormControl>
                 <InputLabel
                   shrink={true}

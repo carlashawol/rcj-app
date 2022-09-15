@@ -12,68 +12,183 @@ datasource db {
 
 model User {
   id       Int    @id @default(autoincrement())
-  username String @db.VarChar(255)
-  email    String @db.VarChar(255)
-  password String @db.VarChar(255)
-  name     String @db.VarChar(255)
+  username String @unique @db.VarChar(50)
+  email    String @unique @db.VarChar(80)
+  password String @db.VarChar(50)
+  name     String @db.VarChar(50)
+  job      String @db.VarChar(50)
 }
 
 model Client {
-  id               Int          @id @default(autoincrement())
-  name             String       @unique @db.VarChar(255)
-  nit              String       @db.VarChar(255)
-  rif              String       @db.VarChar(255)
-  address          String       @db.VarChar(255)
-  city             String       @db.VarChar(255)
-  department       String       @db.VarChar(255)
-  country          String       @db.VarChar(255)
-  contact          String       @db.VarChar(255)
-  telephone        String       @db.VarChar(255)
-  cellphone        String       @db.VarChar(255)
-  email            String       @db.VarChar(255)
-  payment_method   String       @db.VarChar(255)
-  price_adjustment Int
-  Instrument       Instrument[]
+  id                     Int                      @id @default(autoincrement())
+  name                   String                   @unique @db.VarChar(255)
+  nit                    String                   @unique @db.VarChar(255)
+  rif                    String                   @unique @db.VarChar(255)
+  address                String                   @db.VarChar(255)
+  city                   String                   @db.VarChar(50)
+  department             String                   @db.VarChar(50)
+  country                String                   @db.VarChar(50)
+  contact                String                   @db.VarChar(50)
+  telephone              String                   @db.VarChar(20)
+  cellphone              String                   @db.VarChar(20)
+  email                  String                   @db.VarChar(50)
+  payment_method         String                   @db.VarChar(255)
+  Instrument             Instrument[]
+  Offer                  Offer[]
+  ItemReception          ItemReception[]
+  CalibrationCertificate CalibrationCertificate[]
 }
 
 model Specification {
-  id                      Int          @id @default(autoincrement())
-  name                    String       @unique @db.VarChar(255)
-  brand                   String       @db.VarChar(255)
-  model                   String       @db.VarChar(255)
-  instrument_type         String       @db.VarChar(255)
-  accuracy_class          String       @db.VarChar(255)
-  start_range             String       @db.VarChar(255)
-  end_range               String       @db.VarChar(255)
-  unity                   String       @db.VarChar(255)
-  resolution              String       @db.VarChar(255)
-  division_value          String       @db.VarChar(255)
-  emp                     String       @db.VarChar(255)
-  emp_unity               String       @db.VarChar(255)
-  temperature_coefficient String       @db.VarChar(255)
-  rentability             String       @db.VarChar(255)
-  linearity               String       @db.VarChar(255)
-  hysteresis              String       @db.VarChar(255)
-  sensitivity             String       @db.VarChar(255)
-  calibration_method      String       @db.VarChar(255)
-  Instrument              Instrument[]
+  id                     Int                      @id @default(autoincrement())
+  name                   String                   @unique @db.VarChar(255)
+  brand                  String                   @db.VarChar(255)
+  model                  String                   @db.VarChar(255)
+  instrument_type        String                   @db.VarChar(255)
+  accuracy_class         String                   @db.VarChar(255)
+  start_range            Int
+  end_range              Int
+  unity                  String                   @db.VarChar(20)
+  resolution             Int
+  division_value         Int
+  emp                    Int
+  emp_unity              String                   @db.VarChar(20)
+  calibration_method     String                   @db.VarChar(255)
+  Instrument             Instrument[]
+  CalibrationCertificate CalibrationCertificate[]
+  ItemReception          ItemReception[]
 }
 
 model Instrument {
-  id                     Int           @id @default(autoincrement())
-  image                  Bytes?
-  client_relation        Client        @relation(fields: [client_name], references: [name])
-  client_name            String        @db.VarChar(255)
-  operative_status       String        @db.VarChar(255)
-  metrologic_status      String        @db.VarChar(255)
-  specification_relation Specification @relation(fields: [specification_name], references: [name])
-  specification_name     String        @db.VarChar(255)
-  serial                 String        @db.VarChar(255)
-  inventary              String        @db.VarChar(255)
+  id                     Int             @id @default(autoincrement())
+  client_relation        Client          @relation(fields: [client_name], references: [name])
+  client_name            String          @db.VarChar(255)
+  operative_status       String          @db.VarChar(255)
+  metrologic_status      String          @db.VarChar(255)
+  specification_relation Specification   @relation(fields: [specification_name], references: [name])
+  specification_name     String          @db.VarChar(255)
+  serial                 String          @db.VarChar(255)
+  inventary              String          @db.VarChar(255)
   calibration_frecuency  Int
-  internal_code          String        @db.VarChar(255)
-  sensor_type            String        @db.VarChar(255)
+  internal_code          String          @db.VarChar(255)
+  sensor_type            String          @db.VarChar(50)
   maintenance_frecuency  Int
-  sensor_serial          String        @db.VarChar(255)
-  sensor_ubication       String        @db.VarChar(255)
+  sensor_serial          String          @db.VarChar(50)
+  sensor_ubication       String          @db.VarChar(255)
+  ItemReception          ItemReception[]
+}
+
+model Activity {
+  id           Int    @id @default(autoincrement())
+  service_type String @db.VarChar(255)
+  item         String @db.VarChar(255)
+  method       String @db.VarChar(255)
+}
+
+model OfferActivity {
+  id                  Int    @id @default(autoincrement())
+  service_type        String @db.VarChar(255)
+  brand               String @db.VarChar(255)
+  model               String @db.VarChar(255)
+  serial              String @db.VarChar(255)
+  code                String @db.VarChar(255)
+  place               String @db.VarChar(255)
+  price               Int
+  quantity            Int
+  start_range         Int
+  end_range           Int
+  unity               String @db.VarChar(255)
+  conformity          String @db.VarChar(255)
+  status              String @db.VarChar(255)
+  client_requirements String @db.VarChar(255)
+  Offer               Offer  @relation(fields: [offer_id], references: [id])
+  offer_id            Int
+}
+
+model Offer {
+  id                     Int             @id @default(autoincrement())
+  client_relation        Client          @relation(fields: [client_name], references: [name])
+  client_name            String          @db.VarChar(255)
+  coin                   String          @db.VarChar(10)
+  offer_created_by       String          @db.VarChar(20)
+  reception_date         String          @db.VarChar(20)
+  offer_date             String          @db.VarChar(20)
+  warranty               String          @db.VarChar(50)
+  offer_validity         Int
+  availability           String          @db.VarChar(50)
+  time_certificate       Int
+  viatics                Int
+  offer_reception_date   String          @db.VarChar(20)
+  planned_reception_date String          @db.VarChar(20)
+  ItemReception          ItemReception[]
+  OfferActivity          OfferActivity[]
+}
+
+model ItemReception {
+  id                         Int                      @id @default(autoincrement())
+  instrument_relation        Instrument               @relation(fields: [instrument_id], references: [id])
+  instrument_id              Int
+  order_number               String                   @db.VarChar(255)
+  item_reception_date        String                   @db.VarChar(20)
+  secure_image_url           String?                  @db.VarChar(255)
+  responsible_entering_item  String                   @db.VarChar(255)
+  responsible_receiving_item String                   @db.VarChar(255)
+  request_created_by         String                   @db.VarChar(255)
+  unique_id                  String                   @db.VarChar(10)
+  good_physical_state        String                   @db.VarChar(10)
+  good_operative_state       String                   @db.VarChar(10)
+  operation_manual           String                   @db.VarChar(10)
+  observations               String?                  @db.VarChar(255)
+  specification_relation     Specification            @relation(fields: [specification_name], references: [name])
+  specification_name         String                   @db.VarChar(255)
+  client_relation            Client                   @relation(fields: [client_name], references: [name])
+  client_name                String
+  offer_relation             Offer                    @relation(fields: [offer_id], references: [id])
+  offer_id                   Int
+  CalibrationCertificate     CalibrationCertificate[]
+}
+
+model CalibrationCertificate {
+  id                         Int           @id @default(autoincrement())
+  reception_date             String
+  calibration_date           String
+  generation_date            String
+  lec_inst1                  Float
+  lec_inst2                  Float
+  lec_inst3                  Float
+  val_pattern1               Float
+  val_pattern2               Float
+  val_pattern3               Float
+  error1                     Float
+  error2                     Float
+  error3                     Float
+  uexp1                      Float
+  uexp2                      Float
+  uexp3                      Float
+  ierri_uexp1                Float
+  ierri_uexp2                Float
+  ierri_uexp3                Float
+  emp1                       Float
+  emp2                       Float
+  emp3                       Float
+  conformity1                String        @db.VarChar(255)
+  conformity2                String        @db.VarChar(255)
+  conformity3                String        @db.VarChar(255)
+  environmental_temperature  Float
+  temperature_uncertainty    Float
+  humidity                   Float
+  humidity_uncertainty       Float
+  calibration_pattern_code   String        @db.VarChar(255)
+  number_certificate_pattern Int
+  pattern_traceability       String        @db.VarChar(255)
+  comments                   String?       @db.VarChar(255)
+  calibration_place          String        @db.VarChar(255)
+  calibration_created_by     String        @db.VarChar(255)
+  calibration_approved_by    String        @db.VarChar(255)
+  item_relation              ItemReception @relation(fields: [item_id], references: [id])
+  item_id                    Int
+  client_relation            Client        @relation(fields: [client_name], references: [name])
+  client_name                String        @db.VarChar(255)
+  specification_relation     Specification @relation(fields: [specification_name], references: [name])
+  specification_name         String        @db.VarChar(255)
 }

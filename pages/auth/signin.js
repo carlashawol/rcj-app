@@ -49,7 +49,6 @@ const Signin = (props) => {
   });
 
   const handleSignin = async (values) => {
-    // validate your userinfo
 
     const res = await signIn("credentials", {
       username: values.username,

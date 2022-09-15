@@ -36,7 +36,6 @@ export default NextAuth({
   },
   callbacks: {
     jwt: ({ token, user }) => {
-      // first time jwt callback is run, user object is available
       if (user) {
         token.id = user.id;
       }
@@ -52,3 +51,5 @@ export default NextAuth({
     },
   },
 });
+
+

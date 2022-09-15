@@ -1,48 +1,16 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/Layout";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
 import {
   Typography,
   Box,
   Stack,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
 } from "@mui/material";
 import CardActions from "../components/CardActions";
 import * as React from "react";
-import dynamic from "next/dynamic";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
-const GeneratePDF = dynamic(() => import("../components/GeneratePDF"), {
-  ssr: false,
-});
 
-const styles = {
-  fontFamily: "sans-serif",
-  textAlign: "center",
-};
-const colstyle = {
-  width: "30%",
-};
-const tableStyle = {
-  width: "100%",
-};
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
-
-export default function Home({ allPostsData }) {
+export default function Home() {
 
   return (
     <>

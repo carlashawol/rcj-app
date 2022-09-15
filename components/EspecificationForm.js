@@ -29,7 +29,9 @@ export default function EspecificationForm() {
     "Equipo de calibración",
   ];
   const unity = ["g", "G", "Hz", "L", "m", "N"];
-  const calibration_method = [ "Transferencia", "Sustitución", "Comparación directa", "Equilibrio", "Relación", "Escalamiento"]
+  const calibration_method = [
+    "Comparación directa",
+  ];
 
   const { createSpecification } = useSpecification();
 
@@ -43,18 +45,25 @@ export default function EspecificationForm() {
     model: yup.string().required("Este campo es requerido"),
     instrument_type: yup.string().required("Este campo es requerido"),
     accuracy_class: yup.string().required("Este campo es requerido"),
-    start_range: yup.string().required("Campo requerido"),
-    end_range: yup.string().required("Campo requerido"),
+    start_range: yup
+      .number()
+      .required("Campo requerido")
+      .typeError("Campo numérico"),
+    end_range: yup
+      .number()
+      .required("Campo requerido")
+      .typeError("Campo numérico"),
     unity: yup.string().required("Campo requerido"),
-    resolution: yup.string().required("Campo requerido"),
-    division_value: yup.string().required("Campo requerido"),
-    emp: yup.string().required("Campo requerido"),
+    resolution: yup
+      .number()
+      .required("Campo requerido")
+      .typeError("Campo numérico"),
+    division_value: yup
+      .number()
+      .required("Campo requerido")
+      .typeError("Campo numérico"),
+    emp: yup.number().required("Campo requerido").typeError("Campo numérico"),
     emp_unity: yup.string().required("Campo requerido"),
-    temperature_coefficient: yup.string().required("Este campo es requerido"),
-    rentability: yup.string().required("Este campo es requerido"),
-    linearity: yup.string().required("Este campo es requerido"),
-    hysteresis: yup.string().required("Este campo es requerido"),
-    sensitivity: yup.string().required("Este campo es requerido"),
     calibration_method: yup.string().required("Este campo es requerido"),
   });
 
@@ -420,65 +429,9 @@ export default function EspecificationForm() {
           <Stack
             direction={"row"}
             paddingTop={2}
-            justifyContent="space-between"
-          >
-            <FormControl
-              variant="standard"
-              error={!!errors["temperature_coefficient"]}
-            >
-              <StyledInputLabel
-                htmlFor="temperature_coefficient"
-                label="COHEFICIENTE DE TEMPERATURA"
-              />
-              <StyledInput
-                id="temperature_coefficient"
-                {...register("temperature_coefficient")}
-              />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["temperature_coefficient"]
-                  ? errors["temperature_coefficient"].message
-                  : ""}
-              </FormHelperText>
-            </FormControl>
-
-            <FormControl variant="standard" error={!!errors["rentability"]}>
-              <StyledInputLabel htmlFor="rentability" label="RENTABILIDAD" />
-              <StyledInput id="rentability" {...register("rentability")} />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["rentability"] ? errors["rentability"].message : ""}
-              </FormHelperText>
-            </FormControl>
-
-            <FormControl variant="standard" error={!!errors["linearity"]}>
-              <StyledInputLabel htmlFor="linearity" label="LINEALIDAD" />
-              <StyledInput id="linearity" {...register("linearity")} />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["linearity"] ? errors["linearity"].message : ""}
-              </FormHelperText>
-            </FormControl>
-          </Stack>
-
-          <Stack
-            direction={"row"}
-            paddingTop={2}
             alignItems="end"
             justifyContent="space-between"
           >
-            <FormControl variant="standard" error={!!errors["hysteresis"]}>
-              <StyledInputLabel htmlFor="hysteresis" label="HISTERESIS" />
-              <StyledInput id="hysteresis" {...register("hysteresis")} />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["hysteresis"] ? errors["hysteresis"].message : ""}
-              </FormHelperText>
-            </FormControl>
-
-            <FormControl variant="standard" error={!!errors["sensitivity"]}>
-              <StyledInputLabel htmlFor="sensitivity" label="SENSIBILIDAD" />
-              <StyledInput id="sensitivity" {...register("sensitivity")} />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["sensitivity"] ? errors["sensitivity"].message : ""}
-              </FormHelperText>
-            </FormControl>
 
             <FormControl
               sx={{

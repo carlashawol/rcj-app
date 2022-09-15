@@ -10,9 +10,7 @@ export async function middleware(req) {
   ) {
     const token = await getToken({ req });
 
-    if (!token) {
-      return NextResponse.redirect(`${origin}/auth/signin`);
-    }
+  
   }
 
   return NextResponse.next();

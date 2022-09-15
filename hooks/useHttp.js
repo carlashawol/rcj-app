@@ -1,4 +1,4 @@
-import { getSession, signIn } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useCallback } from "react";
 
 class ApiResponse {
@@ -11,7 +11,6 @@ class ApiResponse {
 const useHttp = () => {
   return useCallback(() => {
     const get = async (url, params) => {
-
       const requestUrl = params ? `${url}?${params}` : url;
 
       const apiResponse = new ApiResponse();
@@ -55,21 +54,13 @@ const useHttp = () => {
       const apiResponse = new ApiResponse();
       const session = await getSession();
 
-      if (session?.error === "RefreshAccessTokenError") {
-        // Force sign in to hopefully resolve error
-        await signIn();
-      }
-
       try {
         const resp = await fetch(url, {
           method: "POST",
-          headers:
-            body instanceof FormData
-              ? {}
-              : {
-                  "Content-Type": "application/json",
-                },
-          body: body instanceof FormData ? body : JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
         });
 
         if (!resp.ok) {

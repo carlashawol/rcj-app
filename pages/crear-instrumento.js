@@ -26,7 +26,6 @@ export default function createInstrument() {
   }, [getClients, setClients]);
 
 
-
   useEffect(() => {
     const getSpecificationResponse = async () => {
       const apiResponse = await getSpecifications();

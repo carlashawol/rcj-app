@@ -62,15 +62,7 @@ export default function FormAddClients() {
       .email("En este campo se debe ingresar un correo electrónico válido")
       .required("Este campo es requerido"),
     payment_method: yup.string().required("Este campo es requerido"),
-    price_adjustment: yup
-      .number()
-      .required("Este campo es requerido")
-      .moreThan(
-        -1,
-        "En este campo se debe ingresar un número mayor o igual que 0"
-      )
-      .integer()
-      .typeError("En este campo se debe ingresar un número"),
+
   });
 
   const {
@@ -95,6 +87,7 @@ export default function FormAddClients() {
     const apiResponse = await createClient(values);
 
     if (!apiResponse.error && apiResponse.data) {
+      reset()
       setTitlePopup(apiResponse.data.name);
       setConfirmationMessage(true);
     } else {
@@ -289,43 +282,6 @@ export default function FormAddClients() {
             </FormControl>
           </Stack>
 
-          <Stack
-            direction={"row"}
-            spacing={55}
-          >
-            <FormControl
-              variant="standard"
-              error={!!errors["price_adjustment"]}
-            >
-              <StyledInputLabel
-                htmlFor="price-ajustment"
-                label="AJUSTAR PRECIOS"
-              />
-              <StyledInput
-                id="price-ajustment"
-                sx={{ "& .MuiInputBase-input": { width: "450px", mr: "5px" } }}
-                {...register("price_adjustment")}
-                endAdornment={
-                  <InputAdornment>
-                    <Typography
-                      fontSize={20}
-                      fontWeight={700}
-                      ml={-6}
-                      mt={1}
-                      zIndex={3}
-                    >
-                      %
-                    </Typography>
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText sx={{ color: "#D32F2F" }}>
-                {errors["price_adjustment"]
-                  ? errors["price_adjustment"].message
-                  : ""}
-              </FormHelperText>
-            </FormControl>
-          </Stack>
           
           <Button
             type="submit"

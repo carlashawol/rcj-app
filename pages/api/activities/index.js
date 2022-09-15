@@ -3,14 +3,13 @@ import { PrismaClient } from "@prisma/client";
 export default async function (req, res) {
   const prisma = new PrismaClient();
   if (req.method === "GET") {
-    const clients = await prisma.client.findMany();
+    const activities = await prisma.activity.findMany();
     prisma.$disconnect();
-    return res.send(clients);
+    return res.send(activities);
   } else if (req.method === "POST") {
     const { body: data } = req;
-    const newClient = await prisma.client.create({ data });
+    const newActivity = await prisma.activity.create({ data });
     prisma.$disconnect();
-    return res.status(201).send(newClient);
+    return res.status(201).send(newActivity);
   }
 }
-

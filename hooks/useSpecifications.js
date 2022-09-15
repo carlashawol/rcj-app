@@ -16,7 +16,7 @@ const useSpecification = () => {
       const apiResponse = new ApiResponse();
 
       const response = await http().post(
-        "https://rcj-services.vercel.app/api/specifications",
+        process.env.NEXT_PUBLIC_CONNECT + "/api/specifications",
         info
       );
 
@@ -40,7 +40,7 @@ const useSpecification = () => {
     const apiResponse = new ApiResponse();
 
     const response = await http().get(
-      "https://rcj-services.vercel.app/api/specifications"
+      process.env.NEXT_PUBLIC_CONNECT + "/api/specifications"
     );
 
     if (response.error) {
@@ -54,9 +54,30 @@ const useSpecification = () => {
     return apiResponse;
   }, [http]);
 
+  const getSpecification = useCallback(
+    async (specificationName) => {
+      const apiResponse = new ApiResponse();
+      const connection = `${process.env.NEXT_PUBLIC_CONNECT}/api/specifications/${specificationName}`;
+
+      const response = await http().get(connection);
+
+      if (response.error) {
+        console.error(`Error getting specification ${response.status}`);
+        apiResponse.status = response.status;
+        apiResponse.error = response.error;
+        return apiResponse;
+      }
+      apiResponse.status = response.status;
+      apiResponse.data = response.data;
+      return apiResponse;
+    },
+    [http]
+  );
+
   return {
     createSpecification,
     getSpecifications,
+    getSpecification,
   };
 };
 
