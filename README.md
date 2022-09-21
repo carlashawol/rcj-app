@@ -1,1 +1,1 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+Web application to automate the management of the RCJ Services Laboratory.
