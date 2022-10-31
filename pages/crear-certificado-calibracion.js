@@ -429,12 +429,12 @@ export default function createCalibrationCertificate() {
               </tbody>
             </table>
 
-            <div id="calibration_footer_pdf_container">
+            {/* <div id="calibration_footer_pdf_container">
               <p>
                 RCJ SERVICES/Lab central de calibraciones:CCP, piso 1 pasillo
                 amarillo S21 Maturín.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         <GeneratePDF html={ref} generate={generate} type="CertificadoCalibracion"/>
