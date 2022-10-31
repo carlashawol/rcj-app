@@ -5,10 +5,6 @@ import html2canvas from "html2canvas";
 const GeneratePdf = ({ html, generate, type }) => {
   if (generate) {
     const doc = new jsPDF({
-      // encryption: {
-      //   userPassword: "1234",
-      //   userPermissions: ["print", "modify", "copy", "annot-forms"],
-      // },
       margin: "10px",
     });
     window.html2canvas = html2canvas;
